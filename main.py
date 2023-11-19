@@ -65,19 +65,19 @@ async def on_message(message):
     url = "https://programming-memes-images.p.rapidapi.com/v1/memes"
 
     headers = {
-      "X-RapidAPI-Key": "0b2bd932d3mshc9d3922e8e75d40p1f9239jsn1c1d21dfd9e1",
-      "X-RapidAPI-Host": "programming-memes-images.p.rapidapi.com"
+        'X-RapidAPI-Key': '0b2bd932d3mshc9d3922e8e75d40p1f9239jsn1c1d21dfd9e1',
+        'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
     }
 
     response = requests.get(url, headers=headers)
+    data = response.json()
 
-    messageresult = response.json()
-
-    result = math.floor(random.random() * response.length)
-
-    print(result)
-    await message.channel.send(messageresult[result].image)
-
+    if response.status_code == 200:
+        random_index = random.randint(0, len(data) - 1)
+        random_image = data[random_index]["image"]
+        await message.channel.send(random_image)
+    else:
+        await message.channel.send(f"Fehler bei der Anfrage. Statuscode: {response.status_code}")
 
 Stay_Alive()
 bot.run(os.environ['DISCORD_TOKEN'])
