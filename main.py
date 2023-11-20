@@ -1,7 +1,6 @@
 import os
 import discord
 from discord.ext import commands
-import textwrap
 import requests
 import json
 from server import Stay_Alive
