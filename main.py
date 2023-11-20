@@ -55,7 +55,7 @@ async def on_message(message):
   if any(word in msg_content for word in asianWords):
     await message.channel.send('du hast ein Bambusping')
 
-  if "/meme" in message.content:
+  if "meme" in message.content:
     response1 = requests.get("https://meme-api.com/gimme")
     json_data = json.loads(response1.text)
     await message.channel.send(json_data.get('url'))
